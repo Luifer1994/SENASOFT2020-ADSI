@@ -41,16 +41,13 @@ class SucursalesController extends Controller
         //LLENAMOS LOS CAMPOS DE LA TABLA SUCURSALES  CON LOS CAMPOS QUE TRAIMOS DEL FORMAULAIO
         $newSucursal->nombre=$request->nombre;
 
+        //GUARDAMOS LA SUCURSAL
+        $newSucursal->save();
+
         //RETORNAMOS A LA VISTA DONDE ESTABVAMOS Y MANDAMOS UN MENSAJE
         return back()->with('mensaje', 'SUCURSAL CREADA CON EXITO');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //

@@ -21,6 +21,7 @@ Route::middleware(['auth:sanctum', 'verified'])->resource('/sucursal', Sucursale
 Route::middleware(['auth:sanctum', 'verified'])->resource('/venta', VentasController::class)
 ->names('venta')->parameters(['venta'=>'request']);
 
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
