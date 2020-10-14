@@ -51,19 +51,13 @@
                         </tr>
                       </thead>
                       <tbody>
-                          @foreach ($facturaTemporal as $item)
-                              <td>{{ $item->nombreP }}</td>
-                              <td>{{ $item->cantidad }}</td>
-                              <td>$ {{ number_format($item->precio)}}</td>
+                          @foreach ($productos as $producto)
+                            <tr>{{ $producto->nombreP }}</tr>
+                            <tr>{{ $producto->precio }}</tr>
+                            <tr>boton</tr>
                           @endforeach
-                        <tr>
-                        </tr>
                       </tbody>
                     </table>
-                    <div class="row">
-                        <div class="col-8"><h4>TOTAL</h4></div>
-                        <div class="col-4 fa-pull-right">$ {{ number_format('1111') }}</div>
-                    </div>
                 </div>
             </div>
         </div>

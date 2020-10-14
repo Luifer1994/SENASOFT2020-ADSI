@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetallesDeInventarios;
 use App\Models\FacturasTemporales;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,14 @@ class VentasController extends Controller
                                                     ->join('users', 'facturas_temporales.id_usuarios', '=', 'users.id')
                                                     ->join('clientes', 'facturas_temporales.id_clientes', '=', 'clientes.id')
                                                     ->get();
-        return view('ventas.index', compact('facturaTemporal'));
+
+        $productos = DetallesDeInventarios::select('detalles_de_inventarios.*','productos.nombre as nombreP',
+                    'productos.precio as precioP', 'productos.iva as iva','inventarios.id_sucursales')
+        ->join('productos', 'detalles_de_inventarios.id_productos','=', 'productos.id')
+        ->join('inventarios', 'detalles_de_inventarios.id_inventarios','=', 'inventarios.id')
+        ->where('detalles_de_inventarios.cantidad', '>','0')
+        ->get();
+        return view('ventas.index', compact('facturaTemporal', 'productos'));
     }
 
     public function create()

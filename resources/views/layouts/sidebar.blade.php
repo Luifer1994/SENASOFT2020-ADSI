@@ -65,6 +65,28 @@
                         </ul>
                     </div>
                 </li>
+
+                <li class="nav-item">
+                    <a data-toggle="collapse" href="#inventario" class="collapsed" aria-expanded="false">
+                        <i class="fas fa-boxes"></i>
+                        <p>INVENTARIO</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="inventario" style="">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{{ route('productos.index') }}">
+                                    <span class="sub-item">Lista de Productos</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('proveedores.index') }}">
+                                    <span class="sub-item">Lista de Proveedores</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
