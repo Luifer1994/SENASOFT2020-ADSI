@@ -72,7 +72,7 @@
                               <i class="fas fa-pencil-alt"></i>
                           </button>
                       </td>
-                      @include('sucursales.actualizar')
+                      @include('proveedores.actualizar')
                   </tr>
               @endforeach
           </tbody>

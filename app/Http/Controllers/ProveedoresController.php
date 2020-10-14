@@ -30,12 +30,6 @@ class ProveedoresController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -57,46 +51,37 @@ class ProveedoresController extends Controller
         return back()->with('mensaje', 'PROVEEDOR REGISTRADO CON EXITO');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'direccion' => 'required',
+            'email' => 'required|email',
+            'telefono' => 'required'
+        ]);
+
+        $proveedor = Proveedores::find($id);
+
+        $proveedor->nombre=$request->name;
+        $proveedor->direccion=$request->direccion;
+        $proveedor->email=$request->email;
+        $proveedor->telefono=$request->telefono;
+
+        $proveedor->save();
+
+        return back()->with('mensaje', 'PROVEEDOR ACTUALIZADO CON EXITO');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

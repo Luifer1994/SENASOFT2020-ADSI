@@ -16,7 +16,7 @@ class CreateProductosTable extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
-            $table->integer('precio');
+            $table->integer('precio')->nullable();
             $table->string('iva');
             $table->foreignId('id_proveedores')->constrained('proveedores');
             $table->timestamps();
