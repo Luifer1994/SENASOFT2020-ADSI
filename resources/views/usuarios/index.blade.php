@@ -41,7 +41,7 @@
                   <span class="btn-label">
                       <i class="fa fa-plus"></i>
                   </span>
-                  Usuario
+                  Nueva Usuario
               </button>
               @include('usuarios.registrar')
           </div>

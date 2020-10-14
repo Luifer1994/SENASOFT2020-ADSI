@@ -41,7 +41,7 @@
                   <span class="btn-label">
                       <i class="fa fa-plus"></i>
                   </span>
-                  Sucursal
+                  Nueva Sucursal
               </button>
               @include('sucursales.registrar')
           </div>
@@ -67,12 +67,8 @@
                           <button type="button" class="btn btn-sm btn-icon btn-round btn-primary" data-toggle="modal" data-target="#actualizar<?=$num?>">
                               <i class="fas fa-pencil-alt"></i>
                           </button>
-                          <button type="button" class="btn btn-sm btn-icon btn-round btn-danger" data-toggle="modal" data-target="#eliminar<?=$num?>">
-                              <i class="fas fa-trash-alt"></i>
-                          </button>
                       </td>
-                      {{-- @include('usuarios.eliminar') --}}
-                      {{-- @include('usuarios.actualizar') --}}
+                      @include('sucursales.actualizar')
                   </tr>
               @endforeach
           </tbody>
