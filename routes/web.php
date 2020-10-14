@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SucursalesController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\VentasController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,6 +16,10 @@ Route::middleware(['auth:sanctum', 'verified'])->resource('/user', UsersControll
 //RUTA DE TIPO RESOURCE QUE CONTIENE TODOS LOS METODOS ALOJADOS EN EL CONTROLADOR DE SucursalesController
 Route::middleware(['auth:sanctum', 'verified'])->resource('/sucursal', SucursalesController::class)
 ->names('sucursal')->parameters(['sucursal' => 'request']);
+
+//RUTA DE TIPO RESOURCE QUE CONTIENE TODOS LOS METODOS ALOJADOS EN EL CONTROLADOR DE VENTAS
+Route::middleware(['auth:sanctum', 'verified'])->resource('/venta', VentasController::class)
+->names('venta')->parameters(['venta'=>'request']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

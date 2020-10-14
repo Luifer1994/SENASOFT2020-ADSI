@@ -52,7 +52,7 @@
         });
 
         // Add Row
-        $('.table').DataTable({
+        $('#table').DataTable({
             "language": { 
             "sProcessing": "Procesando...", 
             "sLengthMenu": "Mostrar _MENU_", 

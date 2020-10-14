@@ -48,6 +48,23 @@
                         </ul>
                     </div>
                 </li>
+
+                <li class="nav-item">
+                    <a data-toggle="collapse" href="#venta" class="collapsed" aria-expanded="false">
+                        <i class="fas fa-cart-arrow-down"></i>
+                        <p>Ventas</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="venta" style="">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{{ route('venta.index') }}">
+                                    <span class="sub-item">Nueva Venta</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
