@@ -17,7 +17,7 @@
                 </li>
                 <li class="nav-item">
                     <a data-toggle="collapse" href="#link" class="collapsed" aria-expanded="false">
-                        <i class="fas fa-user-tie"></i>
+                        <i class="fas fa-users"></i>
                         <p>Usuarios</p>
                         <span class="caret"></span>
                     </a>

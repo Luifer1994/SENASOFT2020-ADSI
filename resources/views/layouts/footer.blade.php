@@ -3,8 +3,8 @@
         <nav class="pull-left">
             <ul class="nav">
                 <li class="nav-item">
-                    <a type="button"   class="btn btn-icon btn-round btn-primary p-2" href="#">
-                        <i style="font-size: 25px;"  class="fab fa-facebook-f"></i>
+                    <a type="button"   class="btn btn-icon btn-round btn-primary p-2"target="_blank" href="https://www.facebook.com/SENABolivarOficial">
+                        <i style="font-size: 25px; color: white"  class="fab fa-facebook-f"></i>
                     </a>
                      <samp>Regional Bolivar</samp>    
                 </li>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Compras;
+use App\Models\DetallesDeCompras;
 use App\Models\DetallesDeInventarios;
 use App\Models\Inventarios;
 use App\Models\Productos;
@@ -109,16 +111,42 @@ class ProductosController extends Controller
         $request->validate(
             ['entrada' => 'required']
         );
+        //INSTANCIO NUESTRO MODELO Compras
+        $compra = new Compras();
 
-        // $entrada = DB::table('detalles_de_inventarios')->where('id_productos', '=', $id)->get();
+        //LLENO LOS CAMPOS DE NUESTRA TABLA CON DATOS QUE MANDO DEL FORMULARIO CABE RECALCAR QUE ESTOS
+        //CAMPOS VIENEN OCULTOS PERO ESTAN DENTRO DE LA VARIABLE $request;
+        $compra->id_proveedores=$request->proveedor;
+        $compra->id_usuarios=$request->usuario;
 
+        //GUARDO 
+        $compra->save();
+        //RETORNO LA ULTIMA COMPRA REALIZADA
+        $data1 = Compras::latest('id')->first();
+
+
+        //INTANCIO NUESTRO MODELO DetallesDeCompras
+        $detalleCompra = new DetallesDeCompras();
+
+        //LLENO LOS CAMPOS DE NUESTRA TABLA CON LOS DATOS QUE VIENEN TANTO DE LA ULTIMA COMPRA COMO DE FORMULARIO
+        $detalleCompra->id_compras=$data1->id;
+        $detalleCompra->cantidad=$request->entrada;
+        $detalleCompra->id_productos=$request->producto;
+        
+        //GUARDO
+        $detalleCompra->save();
+
+        //INTANCIAMOS EL MODELO DetallesDeInventarios QUE SEA IGUAL AL $id QUE MANDAMOS EN EL FORMULARIO
         $detalleInventario = DetallesDeInventarios::find($id);
 
-        $detalleInventario->cantidad=$request->entrada;
+        //ACTUALIZAMOS EL STOCK 
+        $detalleInventario->cantidad=$detalleInventario->cantidad+$request->entrada;
 
+        //GUARDAMOS
         $detalleInventario->save();
 
-        
+        //RETORNAMOS A LA VISTA ANTERIOR Y MADAMOS UN MENSAJE DE EXITO
+        return back()->with('mensaje', 'ENTRADA DE PRODUCTO REALIZADA CON EXITO');
       
     }
 

@@ -10,6 +10,7 @@
             @csrf
             <div class="form-row">
                     <input type="hidden" name="proveedor" value="{{ $producto->id_proveedores }}">
+                    <input type="hidden" name="producto" value="{{ $producto->id_producto}}">
                     <input type="hidden" name="usuario" value="{{ Auth::user()->id }}">
                 <div class="form-group col-md-12">
                     <label for="entrada">

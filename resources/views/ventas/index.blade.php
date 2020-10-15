@@ -56,13 +56,13 @@
                             <?php $num++; ?>
                             <tr>
                                 <td>{{ $producto->nombreP }}</td>
-                                <td>{{ $producto->precioP }}</td>
+                                <td>$ {{number_format($producto->precioP)}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-round btn-danger" data-toggle="modal" data-target="#actualizar<?=$num?>">
+                                    <button type="button" class="btn btn-sm btn-round btn-danger" data-toggle="modal" data-target="#agregar<?=$num?>">
                                         Agregar
                                     </button>
                                 </td>
-                                {{-- @include('usuarios.eliminar') --}}
+                                @include('ventas.agregar')
                             </tr>
                         @endforeach
                     </tbody>
@@ -71,6 +71,12 @@
             </div>
         </div>
           <div class="col-sm-6 col-md-6">
+            <div style="text-align: right">
+              <button type="button" class="btn btn-round btn-success" data-toggle="modal" data-target="#cliente<?=$num?>">
+                REGISTRAR CLIENTE
+              </button>
+            </div>
+            <br>
               <div class="card card-stats card-round">
                 <div class="card-header">
                     <div class="row">
