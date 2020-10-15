@@ -3,7 +3,7 @@
     VENTAS
 @endsection
 @section('contenido')
- {{-- MENSAJE QUE RETORNA EL CONTROLADOR AL ELIMINAR UN FUNCIONARIO --}}
+ {{-- MENSAJE QUE RETORNA EL CONTROLADOR--}}
  @if (session('mensaje'))
  <script>
     swal("EXITO!", "{{ session('mensaje') }}", {
@@ -15,6 +15,20 @@
                     },
                 });
  </script>
+@endif
+
+{{-- MENSAJE QUE RETORNA EL CONTROLADOR --}}
+@if (session('mensaje2'))
+<script>
+   swal("ERROR!", "{{ session('mensaje2') }}", {
+                   icon : "error",
+                   buttons: {        			
+                       confirm: {
+                           className : 'btn btn-danger'
+                       }
+                   },
+               });
+</script>
 @endif
 
 {{-- ERROR DE VALIDACION DE CAMPOS Y MUESTRA UNA ALERTA DE QUE HAY CAMPOS VAVIOS --}}
@@ -96,6 +110,7 @@
             <br>
               <div class="card card-stats card-round">
                 <div class="card-header">
+                  <h5>QUERIDO VENDEDOR ANTES DE REALIZAR SELECCIONA UN CLIENTE</h5>
                 </div>
                   <div class="card-body table-responsive">
                     <table class="table">

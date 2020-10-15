@@ -16,6 +16,7 @@ class VentasController extends Controller
     
     public function index()
     {
+        
         $clientes = Clientes::all();
 
         $facturaTemporal = FacturasTemporales::select('facturas_temporales.*', 'productos.nombre as nombrePro', 'productos.precio as precioPro')
@@ -87,7 +88,6 @@ class VentasController extends Controller
         
         
         foreach ($factura as $value) {
-           
            $facturaTemporal = FacturasTemporales::find($value->id);
            $facturaTemporal->id_clientes=$request->id;
            $facturaTemporal->save();
@@ -106,15 +106,25 @@ class VentasController extends Controller
     
         foreach ($factura as $value) {
 
-            $Factura = new Facturas();
-            $Factura->id_clientes=$value->id_clientes;
-            $Factura->id_usuarios=$value->id_usuarios;
-            $Factura->id_productos=$value->id_productos;
-            $Factura->cantidad=$value->cantidad;
-            $Factura->save();
+            if ($value->id_clientes) {
+                $Factura = new Facturas();
+                $Factura->id_clientes=$value->id_clientes;
+                $Factura->id_usuarios=$value->id_usuarios;
+                $Factura->id_productos=$value->id_productos;
+                $Factura->cantidad=$value->cantidad;
+                $Factura->save();
+            }else {
+                return back()->with('mensaje2', 'PAGO DENEGADO DEBES SELECCIONAR UN CLIENTE');
+            }
 
-            return back()->with('mensaje', 'SU PAGO SE REALIZO CON EXITO');
          }
          $factura = DB::table('facturas_temporales')->where('id_usuarios', '=', Auth::user()->id)->get();
+    
+         foreach ($factura as  $key) {
+             $facturaT = FacturasTemporales::find($key->id);
+             $facturaT->delete();
+         }
+
+         return back()->with('mensaje', 'SU PAGO SE REALIZO CON EXITO');
     }
 }
