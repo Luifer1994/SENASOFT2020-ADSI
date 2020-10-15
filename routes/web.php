@@ -37,6 +37,8 @@ Route::middleware(['auth:sanctum', 'verified'])->resource('cliente', ClientesCon
 ->names('cliente')->parameters(['cliente'=>'request']);
 
 
+Route::post('guardarF', [VentasController::class, 'guardarFactura'])->name('guardarF');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');

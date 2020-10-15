@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Clientes;
 use App\Models\DetallesDeInventarios;
+use App\Models\DetallesFacturas;
+use App\Models\Facturas;
 use App\Models\FacturasTemporales;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,13 +17,14 @@ class VentasController extends Controller
     public function index()
     {
         $clientes = Clientes::all();
+
         $facturaTemporal = FacturasTemporales::select('facturas_temporales.*', 'productos.nombre as nombrePro', 'productos.precio as precioPro')
         ->join('productos', 'facturas_temporales.id_productos', '=', 'productos.id')
         ->get();
         $suma = DB::table('facturas_temporales')->sum('total');
 
         $iva = $suma*19/100;
-                                                    
+    
 
         $productos = DetallesDeInventarios::select('detalles_de_inventarios.*','productos.nombre as nombreP',
                     'productos.precio as precioP', 'productos.iva as iva','inventarios.id_sucursales')
@@ -39,6 +42,9 @@ class VentasController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'cantidad' => 'required'
+        ]);
         
         $total =$request->cantidad*$request->precio;
 
@@ -50,7 +56,17 @@ class VentasController extends Controller
         $facturaTemporal->id_usuarios=Auth::user()->id;
         $facturaTemporal->total=$total;
 
+        $detalleI= DB::table('detalles_de_inventarios')->where('id_productos', '=', $request->idP)->get();
+
+        foreach ($detalleI as $detalle) {
+            $inevntario = DetallesDeInventarios::find($detalle->id);
+            $inevntario->cantidad=$inevntario->cantidad-$request->cantidad;
+            $inevntario->save();
+        }
+
         $facturaTemporal->save();
+
+
 
         return back();
     }
@@ -75,7 +91,6 @@ class VentasController extends Controller
            $facturaTemporal = FacturasTemporales::find($value->id);
            $facturaTemporal->id_clientes=$request->id;
            $facturaTemporal->save();
-           
         }
         return back();
     }
@@ -84,5 +99,22 @@ class VentasController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function guardarFactura(Request $request)
+    {
+        $factura = DB::table('facturas_temporales')->where('id_usuarios', '=', $request->id)->get();
+    
+        foreach ($factura as $value) {
+
+            $Factura = new Facturas();
+            $Factura->id_clientes=$value->id_clientes;
+            $Factura->id_usuarios=$value->id_usuarios;
+            $Factura->id_productos=$value->id_productos;
+            $Factura->cantidad=$value->cantidad;
+            $Factura->save();
+
+            return back()->with('mensaje', 'SU PAGO SE REALIZO CON EXITO');
+         }
+         $factura = DB::table('facturas_temporales')->where('id_usuarios', '=', Auth::user()->id)->get();
     }
 }

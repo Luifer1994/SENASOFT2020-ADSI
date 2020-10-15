@@ -96,11 +96,6 @@
             <br>
               <div class="card card-stats card-round">
                 <div class="card-header">
-                    <div class="row">
-                        <div class="col-6">
-                            <h4 class="card-title">FACTURA</h4>
-                        </div>
-                    </div> 
                 </div>
                   <div class="card-body table-responsive">
                     <table class="table">
@@ -147,6 +142,17 @@
                       <div class="col-6">
                         <h3 class="pull-right">$ {{number_format($suma+$iva)}}</h3>
                       </div>
+                   </div>
+                   <div class="row">
+                     <div class="col-12">
+                        <form action="{{ route('guardarF') }}" method="POST">
+                          @csrf
+                          <input name="id" type="hidden" value="{{ Auth::user()->id }}">
+                          <button type="submit" title="PAGAR" class="btn btn-block btn-success">
+                            PAGAR
+                          </button>
+                        </form>
+                     </div>
                    </div>
                   </div>
               </div>
