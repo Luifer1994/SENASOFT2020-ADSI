@@ -51,7 +51,6 @@
       <table class="table table-striped" id="table">
           <thead>
             <tr>
-              <th scope="col">ID</th>
               <th scope="col">NOMBRE</th>
               <th scope="col">PRECIO</th>
               <th scope="col">STOCK</th>
@@ -63,16 +62,17 @@
               @foreach ($productos as $producto)
                   <?php $num++; ?>
                   <tr>
-                      <td style="width: 15px">{{ $producto->id }}</td>
                       <td>{{ $producto->nombreP }}</td>
-                      <td>{{ $producto->precio }}</td>
-                      <td>{{ $producto->cantidad }}</td>
-                      <td  style="width: 15px">
-                          <button type="button" class="btn btn-sm btn-icon btn-round btn-primary" data-toggle="modal" data-target="#actualizar<?=$num?>">
-                              <i class="fas fa-pencil-alt"></i>
+                      <td>$ {{number_format($producto->precio)}}</td>
+                      <td @if ($producto->cantidad <= 10)
+                          class="bg-danger-gradient"
+                      @endif>{{ $producto->cantidad }}</td>
+                      <td  style="width: 10px">
+                          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#entrada<?=$num?>">
+                            DarEntrada <i style="font-size: 20px" class="fas fa-arrow-alt-circle-up"></i>
                           </button>
                       </td>
-                      @include('sucursales.actualizar')
+                      @include('productos.entrada')
                   </tr>
               @endforeach
           </tbody>

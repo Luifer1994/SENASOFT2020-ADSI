@@ -43,21 +43,30 @@
               </div>
                 <div class="card-body table-responsive">
                   <table class="table table-striped" id="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">NOMBRE</th>
-                          <th scope="col">PRECIO</th>
-                          <th scope="col">ACCION</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                          @foreach ($productos as $producto)
-                            <tr>{{ $producto->nombreP }}</tr>
-                            <tr>{{ $producto->precio }}</tr>
-                            <tr>boton</tr>
-                          @endforeach
-                      </tbody>
-                    </table>
+                    <thead>
+                      <tr>
+                        <th scope="col">PRODUCTO</th>
+                        <th scope="col">PRECIO</th>
+                        <th scope="col">ACCIONES</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <?php $num=0; ?>
+                        @foreach ($productos as $producto)
+                            <?php $num++; ?>
+                            <tr>
+                                <td>{{ $producto->nombreP }}</td>
+                                <td>{{ $producto->precioP }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-round btn-danger" data-toggle="modal" data-target="#actualizar<?=$num?>">
+                                        Agregar
+                                    </button>
+                                </td>
+                                {{-- @include('usuarios.eliminar') --}}
+                            </tr>
+                        @endforeach
+                    </tbody>
+                  </table>
                 </div>
             </div>
         </div>

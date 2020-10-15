@@ -17,6 +17,25 @@
                 </div>
             </div>
 
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="nombre">
+                    Proveedor
+                </label>
+                <select name="proveedor" id="proveedor" class="form-control">
+                  <option value="">Seleccione...</option>
+                  @foreach ($proveedores as $proveedor)
+                      <option value="{{ $proveedor->id }}">{{ $proveedor->nombre }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="precio">
+                    Precio
+                </label>
+                  <input class="form-control" type="number" name="precio" value="{{ old('precio') }}" id="precio" placeholder="Ingresa el precio">
+              </div>
+          </div>
             <hr>
             <div class="container text-center">
                 <button type="submit" class="btn btn-primary">REGISTRAR</button>
