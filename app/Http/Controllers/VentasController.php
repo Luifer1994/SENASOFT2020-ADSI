@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Clientes;
 use App\Models\DetallesDeInventarios;
 use App\Models\FacturasTemporales;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class VentasController extends Controller
 {
     
     public function index()
     {
+        $clientes = Clientes::all();
         $facturaTemporal = FacturasTemporales::select('facturas_temporales.*', 'productos.nombre as nombreP',
                                                         'users.name as nombreU', 'clientes.nombre as nombreC',
                                                     'productos.precio', 'productos.iva')
@@ -25,7 +29,7 @@ class VentasController extends Controller
         ->join('inventarios', 'detalles_de_inventarios.id_inventarios','=', 'inventarios.id')
         ->where('detalles_de_inventarios.cantidad', '>','0')
         ->get();
-        return view('ventas.index', compact('facturaTemporal', 'productos'));
+        return view('ventas.index', compact('facturaTemporal', 'productos', 'clientes'));
     }
 
     public function create()
@@ -35,10 +39,10 @@ class VentasController extends Controller
 
     public function store(Request $request)
     {
-        
+        return $request->id;
     }
 
-    public function show($id)
+    public function show(Request $request)
     {
         //
     }
@@ -50,7 +54,7 @@ class VentasController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
 

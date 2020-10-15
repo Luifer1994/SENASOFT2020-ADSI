@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\SucursalesController;
@@ -30,6 +31,10 @@ Route::middleware(['auth:sanctum', 'verified'])->resource('productos', Productos
 //RUTA DE TIPO RESOURCE QUE CONTIENE TODOS LOS METODOS ALOJADOS EN EL CONTROLADOR DE PRODUCTOS
 Route::middleware(['auth:sanctum', 'verified'])->resource('proveedores', ProveedoresController::class)
 ->names('proveedores')->parameters(['proveedores'=>'request']);
+
+//RUTA DE TIPO RESOURCE QUE CONTIENE TODOS LOS METODOS ALOJADOS EN EL CONTROLADOR DE PRODUCTOS
+Route::middleware(['auth:sanctum', 'verified'])->resource('cliente', ClientesController::class)
+->names('cliente')->parameters(['cliente'=>'request']);
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
