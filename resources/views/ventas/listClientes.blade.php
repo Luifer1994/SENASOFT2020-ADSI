@@ -25,9 +25,10 @@
                                 <td>{{ $cliente->documento }}</td>
                                 <td>{{ $cliente->nombre }}</td>
                                 <td style="width: 100px">
-                                  <form action="{{ route('venta.store') }}" method="POST">
+                                  <form action="{{ route('venta.update', Auth::user()->id) }}" method="POST">
                                     @csrf
-                                    <input type="hidden" name="cliente" value="{{$cliente->id }}">
+                                    @method('PUT')
+                                    <input type="hidden" name="id" value="{{$cliente->id }}">
                                     <button title="SELECCIONAR CLIENTE" type="submit" class="btn btn-sm btn-round btn-danger">
                                      Seleccionar
                                     </button>
